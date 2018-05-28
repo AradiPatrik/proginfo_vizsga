@@ -1,0 +1,79 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\author{Aradi Patrik}
+\title{Logika Tételkidolgozás}
+\begin{document}
+\maketitle
+\newpage
+\section{Az ítéletkalkulus szintaxisa és szemantikája. Kielégíthetőség, logikai következmény, alap összefüggések.}
+
+Az ítéletlogikában a változók a {0, 1} halmazból kapnak értéket. \newline A formulák változókból épülnek fel, melyeket össekötő jelek alkalmazásával kapunk. Pl.: $\neg, \wedge, \vee, \rightarrow, \leftrightarrow$
+\paragraph{Szintaxis}
+A logikában meghatározza, hogy hogy néz ki egy formula. \newline Pl.: $(p \vee q)$
+\paragraph{Szemantika}
+Megmondja, hogy a leírt formulának mi a jelentése. Mi az adott formulának az értéke egy adott változó értékadás esetén
+\subsection{Szintaxis}
+\paragraph{Változók}
+p, q, r -el jelöjük, melyek {0, 1} értéket vehetnek fel.
+\paragraph{Logikai konstansjelek}
+(0 aritású függvényjelek) az "igaz" $\uparrow$ és a "hamis" $\downarrow$ jelek
+\paragraph{Konnektívák}
+Velük tudjuk összekötni a formulákat, lehetséges értékeik: $\wedge, \vee, \neg, \rightarrow, \leftrightarrow $
+\paragraph{Formulák Deffiníciója}
+\begin{itemize}
+\item Minden változó és minden logikai konstans formula
+\item Ha $F$ formula, akkor $(\neg F)$ is formula
+\item Ha $F$ és $G$ formulák, akkor $(F \wedge G), (F \vee G), (F \rightarrow G), (F \leftrightarrow G)$ is formulák
+\item Más forumla nincs
+\end{itemize}
+\paragraph{Műveleti sorrend}
+A $\wedge$ és $\vee$ műveletek \textit{asszociatívak}, pl.: $(F \vee G) \vee H$ helyett $F \vee G \vee H$-t írhatunk. A $\rightarrow$ művelet \textit{jobb-asszociatív}, $F \rightarrow G \rightarrow H = F \rightarrow ( G \rightarrow H)$ zárójelezést jelenti
+\subsection{Szemantika}
+\paragraph{Boole-függvény}
+Hogy a konnektívák szemantikájáról tudjunk beszélni, mindhez rendelünk egy Boole-függvényt. A Bool-függvény bitvektort egy bitbe képző függvény: $f: \{0,1\}^{n} \rightarrow \{0,1\}.$ \newline
+Az $f|n$ jelyi, hogy $f$ egy n-változós függvény. A $\neg$ unáris Boole függvény. A bináris konnektívákhoz rendelt Boole-függvényekhez készíthető igazságtábla. Egy n változós  Boole-függvény $2^{n}$ soros
+\paragraph{Értékadás}
+Egy $\mathcal{A}$ függvény, mely minden változóhoz egy igazságértéket (bitet: 0 vagy 1) rendel. Egy formula kiértékeléshez szükség van egy értékadásra. \newline
+\paragraph{Az $\mathcal{A}$ értékadás mellet az $F$ formula értékét $\mathcal{A}(F)$ jelöli.}
+\begin{itemize}
+\item Ha a formula a $p$ változó, akkor értéke $\mathcal{A}(p)$
+\item $\mathcal{A}(\uparrow) = 1$
+\item $\mathcal{A}(\downarrow) = 0$
+\item $\mathcal{A}(\neg F) = \neg \mathcal{A}(F)$
+\item $\mathcal{A}(F \vee G) = \mathcal{A}() \vee \mathcal{A}(G)$
+\item $\mathcal{A}(F \wedge G) = \mathcal{A}(F) \wedge \mathcal{A}(G)$
+\item $\mathcal{A}(F \rightarrow G) = \mathcal{A}(F) \rightarrow \mathcal{A}(G)$
+\item $\mathcal{A}(F \leftrightarrow G) = \mathcal{A}(F) \leftrightarrow \mathcal{A}(G)$
+\end{itemize}
+Tehát rekurzívan kiértékeljük az "eggyel egyszerűbb" formulákat és a legkülső konnektívának megfelelően kombináljuk az értékeket.
+\paragraph{Közvetlen részformula}
+Egy formula közvetlen részformulái az "eggyel lentebbi szinten lévő részei". 
+\begin{itemize}
+\item Változóknak és a logikai konstansoknak nincs közvetlen részforulája.
+\item A $(\neg F)$ alakú formulák közvetlen részformulája $F$
+\item Az $(F \vee G), (F \wedge G), (F \rightarrow G), (F \leftrightarrow G)$ alakú formulák közvetlen részformulái  $F$ és $G$
+\end{itemize}
+A formulák kiértékelését úgy végeztük el, hogy rekurzívan kiértékeljük a közvetlen részformulákat, majd az eredményekből és a külső konnektivitásból számítjuk az egész formula értékét. Az ilyen rendszerű definíciókat és bizonyításokat a \textbf{formula felépítése szerinti teljes indukció}nak nevezzük.
+\paragraph{Felépítés szerinti indukció}
+Deffiníciókban csak meg kell mondjuk, hogy aktuálisan a formulához rendelt objektumot hogyan számítjuk ki a részformuláihoz rendelt objektumokból, ügyelve arra, hogy minden esetet pontosan egyszer vegyünk sorra. \newline
+Bizonyításokban minden esetre meg kell mutatnunk, hogy ha az állítás igaz a formula összes közvetlen részformulájára, akkor miért igaz az egész formuára is. (teljes indukció is így működik)
+\paragraph{Kielégíthetőség}
+Ha az $\mathcal{A}$ értékadásra és az $F$ formuálra $\mathcal{A}(F)=1$, azt úgy is írjuk, hogy $A\models F$ és úgy is mondjuk, hogy $A$ kielégíti $F$-et, vagy $A$ egy modellje $F$-nek. Ha egy formulának van modellje, akkor azt mondjuk, kielégíthető, ha nincs, kielégíthetetlen. Ha az $F$ formulának minden kiértékelés modellje, akkor tautológia, ennek jele pedig $\models F$.
+\paragraph{Modellek halmaza}
+Ha $F$ egy formula, akkor $Mod(F)$ az $F$ összes modelljének halmaza. Tehát azt hogy $\mathcal{A}(F)=1$, vagy $\mathcal{A} \models F$, úgy is írhatjuk, hogy $\mathcal{A}\in Mod(F)$. $F$ pontosan akkor kielégíthetetlen, ha $Mod(F)=\emptyset$. Ha $\Sigma$ formulák egy halmaza és $\mathcal{A}$ egy értékadás, akkor $\mathcal{A} \models \Sigma$ azt jelenti, hogy $\mathcal{A}$ kielégíti $\Sigma$ összes elemét. $F$ formula pontosan akkor tautológia, ha $\Sigma$ kielégíthetetlen.
+\paragraph{Logikai következmény}
+Ha $F$ és $G$ formulák, akkor $F \models G$ ("$F$-nek következménye $G$") azt jelöli, hogy minden $\mathcal{A}$-ra ha $\mathcal{A}(F)=1$, akkor $\mathcal{A}(G)=1$. Tehát, ha $F$ igaz akkor G is igaz, és $Mod(F) \subseteq Mod(G)$
+Ugyanígy használhatjuk a $\Sigma \models F, \Sigma \models \Gamma$ jelöléseket is, ahol $\Sigma, \Gamma$ formulahalmazok. Pl.: $\Sigma \models F$ akkor áll fenn, ha $\Sigma$ minden modellje, modellje $F$-nek is. $F \equiv G$ jelölés azt jelenti, hogy $Mod(F) = Mod(G)$
+\paragraph{Tétel $Mod(\Sigma \cup \Gamma) = Mod(\Sigma) \cap Mod(\Gamma)$}  Hiszen a bal oldalon szereplő halmazban azok az értékadások vannak, melyek kielégítik $\Sigma \cup \Gamma$ összes elemét, azaz $\Sigma$ összes elemét is és $\Gamma$ összes elemét is, azaz melyek benne vannak $Mod(\Sigma)$-ban is és  $Mod(\Gamma)$-ban is, ez pedig épp a jobb oldal.
+\newpage
+\section{Boole-függvények. Shannon-expanzió. Boole-függvények teljes rendszerei}
+\paragraph{Boole-függvény}
+A Bool-függvény bitvektort egy bitbe képző függvény: $f: \{0,1\}^{n} \rightarrow \{0,1\}.$
+
+\end{document}
