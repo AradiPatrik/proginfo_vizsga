@@ -37,7 +37,7 @@ A $\wedge$ és $\vee$ műveletek \textit{asszociatívak}, pl.: $(F \vee G) \vee 
 \subsection{Szemantika}
 \paragraph{Boole-függvény}
 Hogy a konnektívák szemantikájáról tudjunk beszélni, mindhez rendelünk egy Boole-függvényt. A Bool-függvény bitvektort egy bitbe képző függvény: $f: \{0,1\}^{n} \rightarrow \{0,1\}.$ \newline
-Az $f|n$ jelyi, hogy $f$ egy n-változós függvény. A $\neg$ unáris Boole függvény. A bináris konnektívákhoz rendelt Boole-függvényekhez készíthető igazságtábla. Egy n változós  Boole-függvény $2^{n}$ soros
+Az $f|n$ jelzi, hogy $f$ egy n-változós függvény. A $\neg$ unáris Boole függvény. A bináris konnektívákhoz rendelt Boole-függvényekhez készíthető igazságtábla. Egy n változós  Boole-függvény $2^{n}$ soros
 \paragraph{Értékadás}
 Egy $\mathcal{A}$ függvény, mely minden változóhoz egy igazságértéket (bitet: 0 vagy 1) rendel. Egy formula kiértékeléshez szükség van egy értékadásra. \newline
 \paragraph{Az $\mathcal{A}$ értékadás mellet az $F$ formula értékét $\mathcal{A}(F)$ jelöli.}
@@ -71,9 +71,45 @@ Ha $F$ egy formula, akkor $Mod(F)$ az $F$ összes modelljének halmaza. Tehát a
 Ha $F$ és $G$ formulák, akkor $F \models G$ ("$F$-nek következménye $G$") azt jelöli, hogy minden $\mathcal{A}$-ra ha $\mathcal{A}(F)=1$, akkor $\mathcal{A}(G)=1$. Tehát, ha $F$ igaz akkor G is igaz, és $Mod(F) \subseteq Mod(G)$
 Ugyanígy használhatjuk a $\Sigma \models F, \Sigma \models \Gamma$ jelöléseket is, ahol $\Sigma, \Gamma$ formulahalmazok. Pl.: $\Sigma \models F$ akkor áll fenn, ha $\Sigma$ minden modellje, modellje $F$-nek is. $F \equiv G$ jelölés azt jelenti, hogy $Mod(F) = Mod(G)$
 \paragraph{Tétel $Mod(\Sigma \cup \Gamma) = Mod(\Sigma) \cap Mod(\Gamma)$}  Hiszen a bal oldalon szereplő halmazban azok az értékadások vannak, melyek kielégítik $\Sigma \cup \Gamma$ összes elemét, azaz $\Sigma$ összes elemét is és $\Gamma$ összes elemét is, azaz melyek benne vannak $Mod(\Sigma)$-ban is és  $Mod(\Gamma)$-ban is, ez pedig épp a jobb oldal.
+\paragraph{Fenti bizonyítható indirekt módon is}
+
+
 \newpage
 \section{Boole-függvények. Shannon-expanzió. Boole-függvények teljes rendszerei}
 \paragraph{Boole-függvény}
-A Bool-függvény bitvektort egy bitbe képző függvény: $f: \{0,1\}^{n} \rightarrow \{0,1\}.$
+A Bool-függvény bitvektort egy bitbe képző függvény: $f: \{0,1\}^{n} \rightarrow \{0,1\}.$ Ha az $F$ formulában csak a $\{p_{1}, \ldots, p_{n}\}$ változók szerepelnek, akkor $F$ indukál egy n változós Boole-függvényt, melyet szintén $F$-fel jelölünk. Például, ha a formula $p_{i}(x_{1}, \ldots, x_{n})$ akkor egy olyan Boole-függvényt fog indukálni, hogy $n$ darab bit bejön, és kiválasztja az $i.$ bitet.
+\begin{itemize}
+\item $p_{i}(x_{1}, \ldots, x_{n}) = x_{i}$ (ezt projekciónak hívjuk)
+\item $(\neg F)(x_{1}, \ldots, x_{n}) = \neg(F(x_{1}, \ldots, x_{n}))$
+\item $(F \vee G)(x_{1}, \ldots, x_{n}) = F(x_{1}, \ldots, x_{n}) \vee G(x_{1}, \ldots, x_{n})$
+\item $\ldots$
+\end{itemize}
+\paragraph{Boole-függvények megszorításai} Legyen $f|n$ Boole-függvény, $n>0$. Ha $b \in \{0,1\}$ igazságérték, úgy hogy $f\vert_{x_{n} = b}$ jelöli azt az $(n-1)$-változós Boole-függvényt, melyet úgy kapunk, hogy $f$ inputjában $x_{n}$ értékét $b$-re rögzítjük. Formálisan:
+\begin{equation*}\label{eq:pareto mle2}
+  \begin{aligned}
+f\vert_{x_{n} = b}(x_{1}, \ldots, x_{n-1}) = f(x_{1}, \ldots, x_{n-1}, b)
+ \end{aligned}
+\end{equation*}
+Példák:
+\begin{itemize}
+\item $\vee \vert _{x_{2}=1}$ a konstans 1 függvény: $\vee \vert _{x_{2}=1}(x_{1}) = \vee(x_{1}, 1) = 1$.
+\item $\wedge \vert _{x_{2}=0}$ a konstans 0 függvény
+\item $\wedge \vert _{x_{2}=1}$ az identikus $(x_{1} \rightarrow x_{1})$ függvény
+\end{itemize}
+\paragraph{Shannon expanzió}
+Lényege, hogy egy n változós Boole-függvényt ki tudunk fejezni két n-1 változós Boole-függvény segítségével. Bejön az $f(x_{1}, \ldots, x_{n})$, két eset lehetséges: az $x_n$ vagy 1 vagy 0. Az alábbi képlet esetén:
+\begin{equation*}\label{eq:pareto mle2}
+  \begin{aligned}
+f(x_{1}, \ldots, x_{n}) = (x_n \wedge f\vert_{x_n = 1}(x_{1}, \ldots, x_{n-1})) \vee (\neg x_n \wedge f\vert_{x_n = 0}(x_{1}, \ldots, x_{n-1}))
+ \end{aligned}
+\end{equation*}
+Ha az $x_{n}=1$, akkor a jobb oldali tag hamis lesz, a bal oldal pedig: $f\vert_{x_{n} = 1}(x_{1}, \ldots, x_{n-1}) = f(x_{1}, \ldots, x_{n-1}, 1)$, ami megegyezik $f(x_{1}, \ldots, x_{n})$-nel ez esetben.
+Minden Boole-függvény előáll a projekciók és a $\{\neg, \vee, \wedge\}$ Boole-függvények alkalmas kompozíciójaként. Ezt úgy is mondjuk, hogy $\{\neg, \vee, \wedge\}$ rendszer teljes.
+\paragraph{Bizonyítás} $n$ szerinti teljes indukciót alkalmazunk. Ha $n = 0$, akkor $f|0$ függvény vagy konstans 0, vagy a konstans 1, mindkettő előállítható így. Ha $n > 0$, akkor az indukciós feltevés zserint az $f\vert_{x_{n} = b}(x_{1}, \ldots, x_{n-1})$ Boole-függvények $b \in \{0,1\}$-re előállnak ilyen alakban, a Shannon expanzióban pedig szintén csak ezt a három műveletet alkalmazzuk.
+\paragraph{Következmény} Minden Boole-függvény indukálható olyan formulával, melyben csak $\{\neg, \vee, \wedge\}$ konnektívák szerepelnek.
 
+\newpage
+\section{Konjunktív normálforma. A DPLL algoritmus}
+\paragraph{Konjunktív normálforma}
+Az egyik leggyakrabban alkalmazott normálforma a konjuktív normálform. Az ítéletváltozókat és negáltjaikat literáloknak nevezzük. Véges sok literál diszjunkcióját klóznak nevezzük. Véges sok klóz konjunkcióját pedig konjunktív normálformának, CNF-nek.
 \end{document}
