@@ -45,7 +45,7 @@ Egy $\mathcal{A}$ függvény, mely minden változóhoz egy igazságértéket (bi
 \item $\mathcal{A}(\uparrow) = 1$
 \item $\mathcal{A}(\downarrow) = 0$
 \item $\mathcal{A}(\neg F) = \neg \mathcal{A}(F)$
-\item $\mathcal{A}(F \vee G) = \mathcal{A}() \vee \mathcal{A}(G)$
+\item $\mathcal{A}(F \vee G) = \mathcal{A}(F) \vee \mathcal{A}(G)$
 \item $\mathcal{A}(F \wedge G) = \mathcal{A}(F) \wedge \mathcal{A}(G)$
 \item $\mathcal{A}(F \rightarrow G) = \mathcal{A}(F) \rightarrow \mathcal{A}(G)$
 \item $\mathcal{A}(F \leftrightarrow G) = \mathcal{A}(F) \leftrightarrow \mathcal{A}(G)$
@@ -65,7 +65,7 @@ Bizonyításokban minden esetre meg kell mutatnunk, hogy ha az állítás igaz a
 \paragraph{Kielégíthetőség}
 Ha az $\mathcal{A}$ értékadásra és az $F$ formuálra $\mathcal{A}(F)=1$, azt úgy is írjuk, hogy $\mathcal{A}\models F$ és úgy is mondjuk, hogy $\mathcal{A}$ kielégíti $F$-et, vagy $\mathcal{A}$ egy modellje $F$-nek. Ha egy formulának van modellje, akkor azt mondjuk, kielégíthető, ha nincs, kielégíthetetlen. Ha az $F$ formulának minden kiértékelés modellje, akkor tautológia, ennek jele pedig $\models F$.
 \paragraph{Modellek halmaza}
-Ha $F$ egy formula, akkor $Mod(F)$ az $F$ összes modelljének halmaza. Tehát azt hogy $\mathcal{A}(F)=1$, vagy $\mathcal{A} \models F$, úgy is írhatjuk, hogy $\mathcal{A}\in Mod(F)$. $F$ pontosan akkor kielégíthetetlen, ha $Mod(F)=\emptyset$. Ha $\Sigma$ formulák egy halmaza és $\mathcal{A}$ egy értékadás, akkor $\mathcal{A} \models \Sigma$ azt jelenti, hogy $\mathcal{A}$ kielégíti $\Sigma$ összes elemét. $F$ formula pontosan akkor tautológia, ha $\Sigma$ kielégíthetetlen.
+Ha $F$ egy formula, akkor $Mod(F)$ az $F$ összes modelljének halmaza. Tehát azt hogy $\mathcal{A}(F)=1$, vagy $\mathcal{A} \models F$, úgy is írhatjuk, hogy $\mathcal{A}\in Mod(F)$. $F$ pontosan akkor kielégíthetetlen, ha $Mod(F)=\emptyset$. Ha $\Sigma$ formulák egy halmaza és $\mathcal{A}$ egy értékadás, akkor $\mathcal{A} \models \Sigma$ azt jelenti, hogy $\mathcal{A}$ kielégíti $\Sigma$ összes elemét. $F$ formula pontosan akkor tautológia, ha $\neg F$ kielégíthetetlen.
 \paragraph{Logikai következmény}
 Ha $F$ és $G$ formulák, akkor $F \models G$ ("$F$-nek következménye $G$") azt jelöli, hogy minden $\mathcal{A}$-ra ha $\mathcal{A}(F)=1$, akkor $\mathcal{A}(G)=1$. Tehát, ha $F$ igaz akkor G is igaz, és $Mod(F) \subseteq Mod(G)$
 Ugyanígy használhatjuk a $\Sigma \models F, \Sigma \models \Gamma$ jelöléseket is, ahol $\Sigma, \Gamma$ formulahalmazok. Pl.: $\Sigma \models F$ akkor áll fenn, ha $\Sigma$ minden modellje, modellje $F$-nek is. $F \equiv G$ jelölés azt jelenti, hogy $Mod(F) = Mod(G)$
