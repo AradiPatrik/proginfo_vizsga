@@ -1,6 +1,5 @@
 \documentclass[10pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
-\usepackage[magyar]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -64,7 +63,7 @@ A formulák kiértékelését úgy végeztük el, hogy rekurzívan kiértékelj�
 Deffiníciókban csak meg kell mondjuk, hogy aktuálisan a formulához rendelt objektumot hogyan számítjuk ki a részformuláihoz rendelt objektumokból, ügyelve arra, hogy minden esetet pontosan egyszer vegyünk sorra. \newline
 Bizonyításokban minden esetre meg kell mutatnunk, hogy ha az állítás igaz a formula összes közvetlen részformulájára, akkor miért igaz az egész formuára is. (teljes indukció is így működik)
 \paragraph{Kielégíthetőség}
-Ha az $\mathcal{A}$ értékadásra és az $F$ formuálra $\mathcal{A}(F)=1$, azt úgy is írjuk, hogy $A\models F$ és úgy is mondjuk, hogy $A$ kielégíti $F$-et, vagy $A$ egy modellje $F$-nek. Ha egy formulának van modellje, akkor azt mondjuk, kielégíthető, ha nincs, kielégíthetetlen. Ha az $F$ formulának minden kiértékelés modellje, akkor tautológia, ennek jele pedig $\models F$.
+Ha az $\mathcal{A}$ értékadásra és az $F$ formuálra $\mathcal{A}(F)=1$, azt úgy is írjuk, hogy $\mathcal{A}\models F$ és úgy is mondjuk, hogy $\mathcal{A}$ kielégíti $F$-et, vagy $\mathcal{A}$ egy modellje $F$-nek. Ha egy formulának van modellje, akkor azt mondjuk, kielégíthető, ha nincs, kielégíthetetlen. Ha az $F$ formulának minden kiértékelés modellje, akkor tautológia, ennek jele pedig $\models F$.
 \paragraph{Modellek halmaza}
 Ha $F$ egy formula, akkor $Mod(F)$ az $F$ összes modelljének halmaza. Tehát azt hogy $\mathcal{A}(F)=1$, vagy $\mathcal{A} \models F$, úgy is írhatjuk, hogy $\mathcal{A}\in Mod(F)$. $F$ pontosan akkor kielégíthetetlen, ha $Mod(F)=\emptyset$. Ha $\Sigma$ formulák egy halmaza és $\mathcal{A}$ egy értékadás, akkor $\mathcal{A} \models \Sigma$ azt jelenti, hogy $\mathcal{A}$ kielégíti $\Sigma$ összes elemét. $F$ formula pontosan akkor tautológia, ha $\Sigma$ kielégíthetetlen.
 \paragraph{Logikai következmény}
